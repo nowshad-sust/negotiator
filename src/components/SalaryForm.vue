@@ -23,7 +23,7 @@
       </v-col>
     </v-row>
     <v-row v-else class="d-flex flex-row justify-center mb-6 pt-4">
-      <v-col cols="6">
+      <v-col cols="8" lg="6" md="7" sm="5">
         <h2>Your offer: €{{ salary }}</h2>
       </v-col>
     </v-row>
