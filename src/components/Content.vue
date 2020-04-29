@@ -13,15 +13,19 @@
     >
       <Tabs></Tabs>
     </v-col>
+    <modal />
   </v-row>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import Tabs from './Tabs.vue';
+import Modal from './Modal.vue';
 
 @Component({
   components: {
-    Tabs: () => import('./Tabs.vue')
+    Tabs,
+    Modal
   }
 })
 export default class Content extends Vue {}

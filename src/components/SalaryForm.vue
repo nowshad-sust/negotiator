@@ -1,6 +1,6 @@
 <template>
   <v-form ref="form" v-model="valid" @submit.prevent="submit" lazy-validation>
-    <v-row class="d-flex flex-row justify-center mb-6">
+    <v-row class="d-flex flex-row justify-center mb-6 pt-4" v-if="showForm">
       <v-col cols="8">
         <v-text-field
           type="number"
@@ -19,7 +19,12 @@
         ></v-text-field>
       </v-col>
       <v-col cols="2">
-        <v-btn class="mr-6" type="submit">submit</v-btn>
+        <v-btn class="mr-6" type="submit">Submit</v-btn>
+      </v-col>
+    </v-row>
+    <v-row v-else class="d-flex flex-row justify-center mb-6 pt-4">
+      <v-col cols="6">
+        <h2>Your offer: €{{ salary }}</h2>
       </v-col>
     </v-row>
   </v-form>
@@ -27,6 +32,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
+import { store, mutations } from '../store';
 
 type Salary = string | number | null;
 type VForm = Vue & { validate: () => boolean };
@@ -47,10 +53,26 @@ export default class SalaryForm extends Vue {
   get form(): VForm {
     return this.$refs.form as VForm;
   }
+  get showForm(): boolean {
+    return !(
+      (this.title === 'Employee' && !!store.minSalary) ||
+      (this.title === 'Employer' && !!store.maxSalary)
+    );
+  }
+  get maxSalary(): number {
+    return store.maxSalary;
+  }
+  get minSalary(): number {
+    return store.minSalary;
+  }
 
   submit() {
     if (this.form.validate()) {
-      console.log('Successful submission');
+      if (this.title === 'Employee') {
+        mutations.setMinSalary(this.salary as number);
+      } else {
+        mutations.setMaxSalary(this.salary as number);
+      }
     }
   }
 }
