@@ -7,7 +7,10 @@
     tile
   >
     <v-col
-      cols="4"
+      cols="11"
+      lg="4"
+      md="6"
+      sm="11"
       height="100%"
       class="flex-grow-0 flex-shrink-0 mt-12 align-center"
     >

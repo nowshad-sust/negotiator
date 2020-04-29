@@ -1,7 +1,7 @@
 <template>
-  <div class="text-center">
+  <div class="flat text-center">
     <v-dialog v-model="showModal" width="500">
-      <v-card>
+      <v-card class="pb-5">
         <v-card-title :class="'white--text ' + modalColor">
           {{ modalTitle }}
           <v-spacer></v-spacer>
@@ -10,17 +10,15 @@
           </v-btn>
         </v-card-title>
 
-        <v-card-title>Employer's offer: {{ maxSalary }}</v-card-title>
-        <v-card-title>Employee's expectation: {{ minSalary }}</v-card-title>
+        <v-card-text class="headline font-weight-light mt-5">
+          <p>Employer's offer: {{ maxSalary }}</p>
+          <p>Employee's expectation: {{ minSalary }}</p>
+        </v-card-text>
 
         <v-divider></v-divider>
 
-        <!-- <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="closeModal">
-            Close
-          </v-btn>
-        </v-card-actions> -->
+        <weather></weather>
+        <v-spacer></v-spacer>
       </v-card>
     </v-dialog>
   </div>
@@ -29,8 +27,13 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { store, mutations } from '../store';
+import Weather from './Weather.vue';
 
-@Component({})
+@Component({
+  components: {
+    Weather
+  }
+})
 export default class Tabs extends Vue {
   get showModal() {
     return store.showModal;

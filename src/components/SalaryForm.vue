@@ -1,7 +1,7 @@
 <template>
   <v-form ref="form" v-model="valid" @submit.prevent="submit" lazy-validation>
     <v-row class="d-flex flex-row justify-center mb-6 pt-4" v-if="showForm">
-      <v-col cols="8">
+      <v-col cols="7" lg="8">
         <v-text-field
           type="number"
           prefix="€"
@@ -18,8 +18,8 @@
           required
         ></v-text-field>
       </v-col>
-      <v-col cols="2">
-        <v-btn class="mr-6" type="submit">Submit</v-btn>
+      <v-col cols="4" lg="3">
+        <v-btn type="submit">Submit</v-btn>
       </v-col>
     </v-row>
     <v-row v-else class="d-flex flex-row justify-center mb-6 pt-4">
