@@ -34,11 +34,4 @@ import Modal from './Modal.vue';
 export default class Content extends Vue {}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="stylus">
-// .content
-//     flex 0 0 50%
-//     border 1px solid grey
-//     display flex
-//     flex-direction column
-</style>
+<style scoped lang="stylus"></style>

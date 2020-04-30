@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto mt-5 mb-3" max-width="300">
+  <v-card v-if="!error" class="mx-auto mt-5 mb-3" max-width="300">
     <v-list-item two-line>
       <v-list-item-content>
         <v-list-item-title class="headline">{{ name }}</v-list-item-title>
@@ -23,17 +23,25 @@
       <v-list-item-subtitle>{{ windSpeed }} meter/sec</v-list-item-subtitle>
     </v-list-item>
   </v-card>
+  <v-card v-else class="mx-auto mt-5 mb-3" max-width="300">
+    <v-alert color="red" border="left" elevation="2" colored-border>
+      {{ error }}
+    </v-alert>
+  </v-card>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-const url =
-  'http://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&appid=e48dcca5c657f6973617eeafdc525022';
+import { store, mutations } from '../store';
+
+const appId = 'e48dcca5c657f6973617eeafdc52502';
+
+const url = `http://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&appid=${appId}`;
 
 @Component({})
 export default class Weather extends Vue {
   name = 'London';
-  temp = 11;
+  temp = 0;
   feelsLike = 0;
   windSpeed = 4.1;
 
@@ -41,15 +49,29 @@ export default class Weather extends Vue {
     const date = new Date();
     return date.toLocaleString('en-GB', { timeZone: 'Europe/London' });
   }
+  get error() {
+    return store.error;
+  }
+
   created() {
     this.fetchWeather();
   }
 
   async fetchWeather() {
-    const { main, wind } = await fetch(url).then(res => res.json());
-    this.temp = parseInt(main.temp);
-    this.feelsLike = parseInt(main.feels_like);
-    this.windSpeed = parseFloat(wind.speed.toFixed(2));
+    try {
+      const { main, wind } = await fetch(url).then(res => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error();
+        }
+      });
+      this.temp = parseInt(main.temp);
+      this.feelsLike = parseInt(main.feels_like);
+      this.windSpeed = parseFloat(wind.speed.toFixed(2));
+    } catch {
+      mutations.setError('Failed to fetch London weather data!');
+    }
   }
 }
 </script>

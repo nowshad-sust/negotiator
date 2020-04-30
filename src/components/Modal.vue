@@ -5,7 +5,7 @@
         <v-card-title :class="'white--text ' + modalColor">
           {{ modalTitle }}
           <v-spacer></v-spacer>
-          <v-btn class="white--text" text @click="closeModal">
+          <v-btn class="white--text" text @click="toggleModal">
             Close
           </v-btn>
         </v-card-title>
@@ -51,7 +51,7 @@ export default class Tabs extends Vue {
     return this.minSalary <= this.maxSalary ? 'success' : 'error';
   }
 
-  closeModal() {
+  toggleModal() {
     mutations.toggleModal();
   }
 }

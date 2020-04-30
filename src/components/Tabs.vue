@@ -1,20 +1,24 @@
 <template>
-  <v-card class="mx-auto">
+  <v-card class="mx-auto d-flex flex-column">
     <v-card-title class="justify-center text-center">
       <div class="display-1">Salary Negotiator</div>
     </v-card-title>
     <v-toolbar flat class="v-tool-bar-custom" height="auto">
       <template v-slot:extension>
-        <v-tabs v-model="currentTab" fixed-tabs>
-          <v-tabs-slider></v-tabs-slider>
+        <v-tabs
+          v-model="currentTab"
+          fixed-tabs
+          background-color="blue-grey darken-1"
+        >
+          <v-tabs-slider color="yellow"></v-tabs-slider>
 
           <v-tab
             v-for="(tab, index) in tabs"
             :key="index"
             :href="'#mobile-tabs-5-' + (index + 1)"
-            class="primary--text"
+            class="white--text"
           >
-            <v-icon>{{ tab.icon }}</v-icon> {{ tab.title }}
+            <v-icon class="white--text">{{ tab.icon }}</v-icon> {{ tab.title }}
           </v-tab>
         </v-tabs>
       </template>
@@ -35,12 +39,16 @@
         </v-card>
       </v-tab-item>
     </v-tabs-items>
+    <v-btn v-if="modalExists" color="red lighten-2" dark @click="toggleModal">
+      Show Result
+    </v-btn>
   </v-card>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import SalaryForm from './SalaryForm.vue';
+import { store, mutations } from '../store';
 
 @Component({
   components: {
@@ -63,6 +71,12 @@ export default class Tabs extends Vue {
       hint: 'Type your minimum offer'
     }
   ];
+  get modalExists(): boolean {
+    return !!store.minSalary && !!store.maxSalary;
+  }
+  toggleModal() {
+    return mutations.toggleModal();
+  }
 }
 </script>
 

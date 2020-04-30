@@ -3,7 +3,8 @@ import Vue from 'vue';
 export const store = Vue.observable({
   maxSalary: 0,
   minSalary: 0,
-  showModal: false
+  showModal: false,
+  error: ''
 });
 
 export const mutations = {
@@ -22,5 +23,8 @@ export const mutations = {
     if (store.minSalary && store.maxSalary) {
       store.showModal = true;
     }
+  },
+  setError(error: string) {
+    store.error = error;
   }
 };

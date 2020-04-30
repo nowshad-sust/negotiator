@@ -19,4 +19,7 @@ import Content from './components/Content.vue';
 export default class App extends Vue {}
 </script>
 
-<style lang="stylus"></style>
+<style lang="stylus">
+#app
+  background-color lightseagreen
+</style>
