@@ -43,7 +43,7 @@ export default class Weather extends Vue {
   name = 'London';
   temp = 0;
   feelsLike = 0;
-  windSpeed = 4.1;
+  windSpeed = 0;
 
   get dateTimeLondon() {
     const date = new Date();

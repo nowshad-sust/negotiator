@@ -39,7 +39,7 @@
         </v-card>
       </v-tab-item>
     </v-tabs-items>
-    <v-btn v-if="modalExists" color="red lighten-2" dark @click="toggleModal">
+    <v-btn v-if="modalExists" color="red lighten-2" @click="toggleModal">
       Show Result
     </v-btn>
   </v-card>
@@ -80,9 +80,4 @@ export default class Tabs extends Vue {
 }
 </script>
 
-<style scoped lang="stylus">
-// .v-tool-bar-custom
-//   height none !important
-//   .v-toolbar__content
-//     display none
-</style>
+<style scoped lang="stylus"></style>
