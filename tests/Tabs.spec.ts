@@ -68,7 +68,7 @@ describe('Tabs.vue', () => {
     ).toBe(true);
     wrapper.vm.currentTab = '#mobile-tabs-5-1';
     await wrapper.vm.$forceUpdate();
-    await Vue.nextTick();
+    await localVue.nextTick();
     expect(
       wrapper.find('#mobile-tabs-5-1').classes('v-window-item--active')
     ).toBe(false);
