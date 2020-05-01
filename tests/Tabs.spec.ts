@@ -1,9 +1,8 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import Tabs from '../src/components/Tabs.vue';
-import SalaryForm from '../src/components/SalaryForm.vue';
 
-import { mount, shallowMount, createLocalVue } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 
 Vue.use(Vuetify);
 
