@@ -6,7 +6,6 @@
         <v-list-item-subtitle>{{ dateTimeLondon }}</v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
-
     <v-card-text>
       <v-row align="center">
         <v-col class="display-3" cols="12"> {{ temp }}&deg;C </v-col>
@@ -34,10 +33,6 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { state, actions } from '../store';
 
-const appId = '6f0925b21c5b6534ad4615846c2173af';
-
-const url = `http://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&appid=${appId}`;
-
 @Component({})
 export default class Weather extends Vue {
   name = 'London';
@@ -58,6 +53,8 @@ export default class Weather extends Vue {
   }
 
   async fetchWeather() {
+    const appId = process.env.VUE_APP_WEATHER_API_KEY;
+    const url = `http://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&appid=${appId}`;
     try {
       const { main, wind } = await fetch(url).then(res => {
         if (res.ok) {
