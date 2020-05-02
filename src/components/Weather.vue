@@ -32,9 +32,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { store, mutations } from '../store';
+import { state, actions } from '../store';
 
-const appId = 'e48dcca5c657f6973617eeafdc52502';
+const appId = '6f0925b21c5b6534ad4615846c2173af';
 
 const url = `http://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&appid=${appId}`;
 
@@ -50,7 +50,7 @@ export default class Weather extends Vue {
     return date.toLocaleString('en-GB', { timeZone: 'Europe/London' });
   }
   get error() {
-    return store.error;
+    return state.error;
   }
 
   created() {
@@ -70,7 +70,7 @@ export default class Weather extends Vue {
       this.feelsLike = parseInt(main.feels_like);
       this.windSpeed = parseFloat(wind.speed.toFixed(2));
     } catch {
-      mutations.setError('Failed to fetch London weather data!');
+      actions.setError('Failed to fetch London weather data!');
     }
   }
 }

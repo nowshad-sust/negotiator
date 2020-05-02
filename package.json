@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "jest --watch"
+    "test:watch": "jest --watch",
+    "test": "jest"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -29,6 +30,9 @@
     "vuetify": "^2.2.11"
   },
   "devDependencies": {
+    "@babel/plugin-transform-regenerator": "^7.8.7",
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
     "@types/jest": "^25.2.1",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
@@ -45,6 +49,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "jest": "^25.5.2",
     "prettier": "^1.19.1",
+    "regenerator-runtime": "^0.13.5",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
     "stylus": "^0.54.7",

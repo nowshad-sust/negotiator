@@ -48,7 +48,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import SalaryForm from './SalaryForm.vue';
-import { store, mutations } from '../store';
+import { state, actions } from '../store';
 
 @Component({
   components: {
@@ -72,10 +72,10 @@ export default class Tabs extends Vue {
     }
   ];
   get modalExists(): boolean {
-    return !!store.minSalary && !!store.maxSalary;
+    return !!state.minSalary && !!state.maxSalary;
   }
   toggleModal() {
-    return mutations.toggleModal();
+    return actions.toggleModal();
   }
 }
 </script>

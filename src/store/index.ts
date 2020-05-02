@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-export const store = Vue.observable({
+export const state = Vue.observable({
   maxSalary: 0,
   minSalary: 0,
   showModal: false,
@@ -9,22 +9,37 @@ export const store = Vue.observable({
 
 export const mutations = {
   setMaxSalary(salary: number) {
-    store.maxSalary = salary;
-    this.checkModal();
+    state.maxSalary = salary;
   },
   setMinSalary(salary: number) {
-    store.minSalary = salary;
-    this.checkModal();
+    state.minSalary = salary;
   },
   toggleModal() {
-    store.showModal = !store.showModal;
+    state.showModal = !state.showModal;
   },
   checkModal() {
-    if (store.minSalary && store.maxSalary) {
-      store.showModal = true;
+    if (state.minSalary && state.maxSalary) {
+      state.showModal = true;
     }
   },
   setError(error: string) {
-    store.error = error;
+    state.error = error;
+  }
+};
+
+export const actions = {
+  setMaxSalary(salary: number) {
+    mutations.setMaxSalary(salary);
+    mutations.checkModal();
+  },
+  setMinSalary(salary: number) {
+    mutations.setMinSalary(salary);
+    mutations.checkModal();
+  },
+  toggleModal() {
+    mutations.toggleModal();
+  },
+  setError(error: string) {
+    mutations.setError(error);
   }
 };

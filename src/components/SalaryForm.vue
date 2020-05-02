@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import { store, mutations } from '../store';
+import { state, actions } from '../store';
 
 type Salary = string | number | null;
 type VForm = Vue & { validate: () => boolean };
@@ -54,23 +54,23 @@ export default class SalaryForm extends Vue {
   }
   get showForm(): boolean {
     return !(
-      (this.title === 'Employee' && !!store.minSalary) ||
-      (this.title === 'Employer' && !!store.maxSalary)
+      (this.title === 'Employee' && !!state.minSalary) ||
+      (this.title === 'Employer' && !!state.maxSalary)
     );
   }
-  get maxSalary(): number {
-    return store.maxSalary;
+  get maxSalary() {
+    return state.maxSalary;
   }
-  get minSalary(): number {
-    return store.minSalary;
+  get minSalary() {
+    return state.minSalary;
   }
 
   submit() {
     if (this.form.validate()) {
       if (this.title === 'Employee') {
-        mutations.setMinSalary(this.salary as number);
+        actions.setMinSalary(this.salary as number);
       } else {
-        mutations.setMaxSalary(this.salary as number);
+        actions.setMaxSalary(this.salary as number);
       }
     }
   }

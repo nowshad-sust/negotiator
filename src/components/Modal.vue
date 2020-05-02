@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { store, mutations } from '../store';
+import { state, actions } from '../store';
 import Weather from './Weather.vue';
 
 @Component({
@@ -34,15 +34,15 @@ import Weather from './Weather.vue';
     Weather
   }
 })
-export default class Tabs extends Vue {
+export default class Modal extends Vue {
   get showModal() {
-    return store.showModal;
+    return state.showModal;
   }
-  get maxSalary(): number {
-    return store.maxSalary;
+  get maxSalary() {
+    return state.maxSalary;
   }
-  get minSalary(): number {
-    return store.minSalary;
+  get minSalary() {
+    return state.minSalary;
   }
   get modalTitle(): string {
     return this.minSalary <= this.maxSalary ? 'Success!' : 'Failure!';
@@ -52,7 +52,7 @@ export default class Tabs extends Vue {
   }
 
   toggleModal() {
-    mutations.toggleModal();
+    actions.toggleModal();
   }
 }
 </script>
