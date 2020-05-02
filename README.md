@@ -1,35 +1,25 @@
 # negotiator
 
-## Project setup
+## Requirements
+- NodeJS must be installed on your machine.
+- https://openweathermap.org/api app id (you can register and get a key without any cost).
 
+## Project setup and run
+- Clone the project: `git clone https://github.com/nowshad-sust/negotiator.git`
+- Go to the directory: `cd negotiator`
+- Install dependencies: `npm install`
+- Add your https://openweathermap.org/api `APP ID` to your `.env` file
 ```
-npm install
+VUE_APP_WEATHER_API_KEY=YOUR_SECRET_KEY
 ```
-
-### Compiles and hot-reloads for development
-
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
+- Run the application: `npm run serve`
 
 ### Lints and fixes files
+`npm run lint`
 
-```
-npm run lint
-```
+### Testing
+- All tests are inside `/tests` directory
+- Run tests: `npm run test`
 
-### Run Tests
-
-```
-npm run test:unit
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Production Build
+- Create a production build `npm run build`
