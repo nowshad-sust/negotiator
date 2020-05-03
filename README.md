@@ -48,6 +48,7 @@ VUE_APP_WEATHER_API_KEY=YOUR_SECRET_KEY
 ### Testing
 - All tests are inside `/tests` directory
 - Run tests: `npm run test`
+- Run and watch: `npm run test:watch`
 
 ### Production Build
 - Create a production build `npm run build`
