@@ -1,12 +1,14 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
-import Tabs from '../src/components/Tabs.vue';
-
 import { mount, createLocalVue } from '@vue/test-utils';
+import Tabs from '../src/components/Tabs.vue';
+import constants from '../src/constants';
 
 Vue.use(Vuetify);
 
 const localVue = createLocalVue();
+
+const { title, tabs: tabTexts } = constants;
 
 describe('Tabs.vue', () => {
   let vuetify: any;
@@ -21,10 +23,10 @@ describe('Tabs.vue', () => {
 
   it('Check title', () => {
     const tabTitle = wrapper.find('.v-card__title');
-    expect(tabTitle.text()).toBe('Salary Negotiator');
+    expect(tabTitle.text()).toBe(title);
   });
 
-  it('Check tab default selection', () => {
+  it('Check tab default state', () => {
     const tabs = wrapper.findAll('a.v-tab');
 
     expect(tabs.length).toBe(2);
@@ -35,8 +37,8 @@ describe('Tabs.vue', () => {
     expect(firstTab.classes('v-tab--active')).toBe(true);
     expect(secondTab.classes('v-tab--active')).toBe(false);
 
-    expect(firstTab.text()).toBe('Employer');
-    expect(secondTab.text()).toBe('Employee');
+    expect(firstTab.text()).toBe(tabTexts[0].title);
+    expect(secondTab.text()).toBe(tabTexts[1].title);
   });
 
   it('Change current tab', () => {

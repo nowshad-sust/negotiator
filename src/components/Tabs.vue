@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto d-flex flex-column">
     <v-card-title class="justify-center text-center">
-      <div class="display-1">Salary Negotiator</div>
+      <div class="display-1">{{ title }}</div>
     </v-card-title>
     <v-toolbar flat class="v-tool-bar-custom" height="auto">
       <template v-slot:extension>
@@ -40,13 +40,14 @@
       </v-tab-item>
     </v-tabs-items>
     <v-btn v-if="modalExists" color="red lighten-2" @click="toggleModal">
-      Show Result
+      {{ resultButton }}
     </v-btn>
   </v-card>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import constants from '../constants';
 import SalaryForm from './SalaryForm.vue';
 import { state, actions } from '../store';
 
@@ -56,21 +57,11 @@ import { state, actions } from '../store';
   }
 })
 export default class Tabs extends Vue {
+  private tabs = constants.tabs;
+  private title = constants.title;
+  private resultButton = constants.resultButton;
   currentTab = null;
-  tabs = [
-    {
-      title: 'Employer',
-      icon: 'mdi-account-box',
-      placeholder: 'Enter maximum offer',
-      hint: 'Type your maximum offer'
-    },
-    {
-      title: 'Employee',
-      icon: 'mdi-account-box-outline',
-      placeholder: 'Enter minimum offer',
-      hint: 'Type your minimum offer'
-    }
-  ];
+
   get modalExists(): boolean {
     return !!state.minSalary && !!state.maxSalary;
   }

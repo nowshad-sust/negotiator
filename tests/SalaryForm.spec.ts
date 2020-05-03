@@ -1,33 +1,36 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
-import SalaryForm from '../src/components/SalaryForm.vue';
-
 import { mount, createLocalVue } from '@vue/test-utils';
+import SalaryForm from '../src/components/SalaryForm.vue';
+import constants from '../src/constants';
 
 Vue.use(Vuetify);
 
 const localVue = createLocalVue();
 
+const { tabs, salaryRequired, salaryZero, yourOffer } = constants;
+
 describe('SalaryForm.vue -> Employer', () => {
   let vuetify: any;
   let wrapper: any;
+  const { title, placeholder, hint } = tabs[0];
   beforeEach(() => {
     vuetify = new Vuetify();
     wrapper = mount(SalaryForm, {
       localVue,
       vuetify,
       propsData: {
-        title: 'Employer',
-        placeholder: 'Enter maximum offer',
-        hint: 'Type your maximum offer'
+        title,
+        placeholder,
+        hint
       }
     });
   });
 
   it('Core Props', () => {
-    expect(wrapper.props('title')).toBe('Employer');
-    expect(wrapper.props('placeholder')).toBe('Enter maximum offer');
-    expect(wrapper.props('hint')).toBe('Type your maximum offer');
+    expect(wrapper.props('title')).toBe(title);
+    expect(wrapper.props('placeholder')).toBe(placeholder);
+    expect(wrapper.props('hint')).toBe(hint);
   });
 
   it('Check input and submit exists', () => {
@@ -45,51 +48,52 @@ describe('SalaryForm.vue -> Employer', () => {
     await localVue.nextTick();
 
     expect(wrapper.find({ name: 'VMessages' }).props('value')[0]).toBe(
-      'Salary is required'
+      salaryRequired
     );
 
     await input.setValue(0);
     await localVue.nextTick();
 
     expect(wrapper.find({ name: 'VMessages' }).props('value')[0]).toBe(
-      'Salary must be greater than zero'
+      salaryZero
     );
 
     await submit.trigger('click');
     await localVue.nextTick();
 
     expect(wrapper.find({ name: 'VMessages' }).props('value')[0]).toBe(
-      'Salary must be greater than zero'
+      salaryZero
     );
 
     await input.setValue(50000);
     wrapper.find('form').trigger('submit');
     await localVue.nextTick();
 
-    expect(wrapper.find('form > div').text()).toBe('Your offer: €50000');
+    expect(wrapper.find('form > div').text()).toBe(`${yourOffer}: €50000`);
   });
 });
 
 describe('SalaryForm.vue -> Employee', () => {
   let vuetify: any;
   let wrapper: any;
+  const { title, placeholder, hint } = constants.tabs[1];
   beforeEach(() => {
     vuetify = new Vuetify();
     wrapper = mount(SalaryForm, {
       localVue,
       vuetify,
       propsData: {
-        title: 'Employee',
-        placeholder: 'Enter minimum offer',
-        hint: 'Type your minimum offer'
+        title,
+        placeholder,
+        hint
       }
     });
   });
 
   it('Core Props', () => {
-    expect(wrapper.props('title')).toBe('Employee');
-    expect(wrapper.props('placeholder')).toBe('Enter minimum offer');
-    expect(wrapper.props('hint')).toBe('Type your minimum offer');
+    expect(wrapper.props('title')).toBe(title);
+    expect(wrapper.props('placeholder')).toBe(placeholder);
+    expect(wrapper.props('hint')).toBe(hint);
   });
 
   it('Check input and submit exists', () => {
@@ -107,27 +111,27 @@ describe('SalaryForm.vue -> Employee', () => {
     await localVue.nextTick();
 
     expect(wrapper.find({ name: 'VMessages' }).props('value')[0]).toBe(
-      'Salary is required'
+      salaryRequired
     );
 
     await input.setValue(0);
     await localVue.nextTick();
 
     expect(wrapper.find({ name: 'VMessages' }).props('value')[0]).toBe(
-      'Salary must be greater than zero'
+      salaryZero
     );
 
     await submit.trigger('click');
     await localVue.nextTick();
 
     expect(wrapper.find({ name: 'VMessages' }).props('value')[0]).toBe(
-      'Salary must be greater than zero'
+      salaryZero
     );
 
     await input.setValue(50000);
     wrapper.find('form').trigger('submit');
     await localVue.nextTick();
 
-    expect(wrapper.find('form > div').text()).toBe('Your offer: €50000');
+    expect(wrapper.find('form > div').text()).toBe(`${yourOffer}: €50000`);
   });
 });

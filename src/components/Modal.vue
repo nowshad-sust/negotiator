@@ -11,8 +11,8 @@
         </v-card-title>
 
         <v-card-text class="headline font-weight-light mt-5">
-          <p>Employer's offer: {{ maxSalary }}</p>
-          <p>Employee's expectation: {{ minSalary }}</p>
+          <p>{{ employerOffer }}: {{ maxSalary }}</p>
+          <p>{{ employeeOffer }}; {{ minSalary }}</p>
         </v-card-text>
 
         <v-divider></v-divider>
@@ -27,6 +27,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { state, actions } from '../store';
+import constrants from '../constants';
 import Weather from './Weather.vue';
 
 @Component({
@@ -35,6 +36,9 @@ import Weather from './Weather.vue';
   }
 })
 export default class Modal extends Vue {
+  private employerOffer = constrants.employerOffer;
+  private employeeOffer = constrants.employeeOffer;
+
   get showModal() {
     return state.showModal;
   }

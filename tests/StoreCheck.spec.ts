@@ -1,30 +1,35 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
+// import 'regenerator-runtime';
 import { mount, createLocalVue, shallowMount } from '@vue/test-utils';
-import 'regenerator-runtime';
 import { state, actions } from '../src/store';
 import SalaryForm from '../src/components/SalaryForm.vue';
 import Modal from '../src/components/Modal.vue';
 import Weather from '../src/components/Weather.vue';
+import constants from '../src/constants';
 
 Vue.use(Vuetify);
 
 const localVue = createLocalVue();
 
+const { tabs } = constants;
+
 describe('Store', () => {
   let vuetify: any;
+
   beforeEach(() => {
     vuetify = new Vuetify();
   });
 
   it('Employer global state', async () => {
+    const { title, placeholder, hint } = tabs[0];
     const wrapper = mount(SalaryForm, {
       localVue,
       vuetify,
       propsData: {
-        title: 'Employer',
-        placeholder: 'Enter maximum offer',
-        hint: 'Type your maximum offer'
+        title,
+        placeholder,
+        hint
       }
     });
 
@@ -35,13 +40,14 @@ describe('Store', () => {
   });
 
   it('Employee global state', async () => {
+    const { title, placeholder, hint } = tabs[1];
     const wrapper = mount(SalaryForm, {
       localVue,
       vuetify,
       propsData: {
-        title: 'Employee',
-        placeholder: 'Enter minimum offer',
-        hint: 'Type your minimum offer'
+        title,
+        placeholder,
+        hint
       }
     });
 

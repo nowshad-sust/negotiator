@@ -24,7 +24,7 @@
     </v-row>
     <v-row v-else class="d-flex flex-row justify-center mb-6 pt-4">
       <v-col cols="8" lg="6" md="7" sm="5">
-        <h2>Your offer: €{{ salary }}</h2>
+        <h2>{{ yourOffer }}: €{{ salary }}</h2>
       </v-col>
     </v-row>
   </v-form>
@@ -33,6 +33,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { state, actions } from '../store';
+import constants from '../constants';
 
 type Salary = string | number | null;
 type VForm = Vue & { validate: () => boolean };
@@ -43,10 +44,11 @@ export default class SalaryForm extends Vue {
   @Prop({ required: true }) placeholder!: string;
   @Prop({ required: true }) hint!: string;
 
+  private yourOffer = constants.yourOffer;
   salary: Salary = null;
   salaryRules = [
-    (v: Salary) => !!v || 'Salary is required',
-    (v: Salary) => (!!v && v > 0) || 'Salary must be greater than zero'
+    (v: Salary) => !!v || constants.salaryRequired,
+    (v: Salary) => (!!v && v > 0) || constants.salaryZero
   ];
 
   get form(): VForm {
