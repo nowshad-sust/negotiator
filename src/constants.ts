@@ -17,7 +17,7 @@ export default {
   resultButton: 'Show Result',
   feelsLike: 'Feels like',
   windUnit: 'meter/sec',
-  url:
+  weatherURL:
     'http://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric',
   weatherError: 'Failed to fetch London weather data!',
   employerOffer: "Employer's offer",

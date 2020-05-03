@@ -59,7 +59,7 @@ export default class Weather extends Vue {
 
   async fetchWeather() {
     const appId = process.env.VUE_APP_WEATHER_API_KEY;
-    const url = `${constants.url}&appid=${appId}`;
+    const url = `${constants.weatherURL}&appid=${appId}`;
     try {
       const { main, wind } = await fetch(url).then(res => {
         if (res.ok) {
